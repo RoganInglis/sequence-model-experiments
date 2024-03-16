@@ -1,0 +1,34 @@
+_target_: src.models.seq_model_module.SeqModelLitModule
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 0.0003
+  weight_decay: 0.01
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  _partial_: true
+  mode: min
+  factor: 0.1
+  patience: 10
+
+net:
+  _target_: x_transformers.TransformerWrapper
+  num_tokens: 50257
+  max_seq_len: 512
+  attn_layers:
+      _target_: x_transformers.Decoder
+      dim: 512
+      depth: 6
+      heads: 8
+      attn_flash: true
+      use_simple_rmsnorm: true
+      rotary_pos_emb: true
+      attn_qk_norm: true
+      attn_qk_norm_dim_scale: true
+
+# compile model for faster training with pytorch 2.0
+compile: true
+
+ignore_index: 50256

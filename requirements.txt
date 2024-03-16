@@ -22,3 +22,6 @@ pre-commit      # hooks for applying linters on commit
 rich            # beautiful text formatting in terminal
 pytest          # tests
 # sh            # for running bash commands in some tests (linux/macos only)
+datasets==2.18.0  # for downloading datasets
+transformers==4.38.2  # for using pre-trained models
+pytest

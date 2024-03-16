@@ -1,0 +1,7 @@
+_target_: src.data.huggingface_text_datamodule.HFTextDataModule
+dataset_name: 'roneneldan/TinyStories'
+tokenizer_name: 'openai-community/gpt2'
+max_length: 512  # TODO - get from global config
+batch_size: 32   # Needs to be divisible by the number of devices (e.g., if in a distributed setup)
+num_workers: 0
+pin_memory: False

@@ -1,0 +1,27 @@
+_target_: src.models.seq_model_module.SeqModelLitModule
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 0.0003
+  weight_decay: 0.01
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  _partial_: true
+  mode: min
+  factor: 0.1
+  patience: 10
+
+net:
+  _target_: src.models.components.x_transformer.XTransformer
+  vocab_size: 50257
+  max_length: 512
+  dim: 512
+  depth: 6
+  heads: 8
+
+# compile model for faster training with pytorch 2.0
+compile: true
+
+ignore_index: 50256
